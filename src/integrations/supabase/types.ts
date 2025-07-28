@@ -14,7 +14,223 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      matches: {
+        Row: {
+          away_goals: number | null
+          away_team_id: string
+          created_at: string
+          home_goals: number | null
+          home_team_id: string
+          id: string
+          match_date: string
+          season: string
+          status: string
+          updated_at: string
+          winner: string | null
+        }
+        Insert: {
+          away_goals?: number | null
+          away_team_id: string
+          created_at?: string
+          home_goals?: number | null
+          home_team_id: string
+          id?: string
+          match_date: string
+          season?: string
+          status?: string
+          updated_at?: string
+          winner?: string | null
+        }
+        Update: {
+          away_goals?: number | null
+          away_team_id?: string
+          created_at?: string
+          home_goals?: number | null
+          home_team_id?: string
+          id?: string
+          match_date?: string
+          season?: string
+          status?: string
+          updated_at?: string
+          winner?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "matches_away_team_id_fkey"
+            columns: ["away_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_home_team_id_fkey"
+            columns: ["home_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      models: {
+        Row: {
+          accuracy: number | null
+          algorithm: string
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          notes: string | null
+          parameters: Json | null
+          trained_at: string | null
+          updated_at: string
+          version: string
+        }
+        Insert: {
+          accuracy?: number | null
+          algorithm: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          notes?: string | null
+          parameters?: Json | null
+          trained_at?: string | null
+          updated_at?: string
+          version: string
+        }
+        Update: {
+          accuracy?: number | null
+          algorithm?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          notes?: string | null
+          parameters?: Json | null
+          trained_at?: string | null
+          updated_at?: string
+          version?: string
+        }
+        Relationships: []
+      }
+      predictions: {
+        Row: {
+          away_expected_goals: number | null
+          confidence_score: number
+          created_at: string
+          home_expected_goals: number | null
+          id: string
+          match_id: string
+          model_name: string
+          predicted_winner: string | null
+          result_status: string | null
+        }
+        Insert: {
+          away_expected_goals?: number | null
+          confidence_score: number
+          created_at?: string
+          home_expected_goals?: number | null
+          id?: string
+          match_id: string
+          model_name: string
+          predicted_winner?: string | null
+          result_status?: string | null
+        }
+        Update: {
+          away_expected_goals?: number | null
+          confidence_score?: number
+          created_at?: string
+          home_expected_goals?: number | null
+          id?: string
+          match_id?: string
+          model_name?: string
+          predicted_winner?: string | null
+          result_status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "predictions_match_id_fkey"
+            columns: ["match_id"]
+            isOneToOne: false
+            referencedRelation: "matches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          created_at: string
+          founded: number | null
+          id: string
+          logo_url: string | null
+          name: string
+          short_code: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          founded?: number | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          short_code: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          founded?: number | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          short_code?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      training_logs: {
+        Row: {
+          accuracy_achieved: number | null
+          completed_at: string | null
+          created_at: string
+          duration: number | null
+          error_message: string | null
+          id: string
+          model_id: string
+          started_at: string
+          status: string
+        }
+        Insert: {
+          accuracy_achieved?: number | null
+          completed_at?: string | null
+          created_at?: string
+          duration?: number | null
+          error_message?: string | null
+          id?: string
+          model_id: string
+          started_at?: string
+          status?: string
+        }
+        Update: {
+          accuracy_achieved?: number | null
+          completed_at?: string | null
+          created_at?: string
+          duration?: number | null
+          error_message?: string | null
+          id?: string
+          model_id?: string
+          started_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "training_logs_model_id_fkey"
+            columns: ["model_id"]
+            isOneToOne: false
+            referencedRelation: "models"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
